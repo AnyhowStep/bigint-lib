@@ -21,7 +21,6 @@ git:
   depth: 1
 
 script:
-  - mkdir ./test/compile-time/actual-output
   - npm run sanity-check-travis
   - npm install codecov
 
