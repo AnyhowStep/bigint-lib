@@ -4,6 +4,9 @@
   "description": "Use BigInt in library code, whether native or polyfilled",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "(tsc) && (cp ./src/jsbi.d.ts ./dist/jsbi.d.ts)",
     "clean": "(rm -r ./dist || true)",
