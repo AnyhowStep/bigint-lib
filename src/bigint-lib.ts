@@ -27,7 +27,7 @@ export interface BigIntLib {
      *
      * @param x - The value to cast to `bigint`
      */
-    BigInt (x : string|number|boolean|object) : bigint;
+    BigInt (x : string|number|boolean|bigint|object) : bigint;
 
     /**
      * Converts a `bigint` value to `string`

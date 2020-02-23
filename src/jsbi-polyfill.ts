@@ -2,7 +2,7 @@ import {BigIntLib} from "./bigint-lib";
 import {JSBI} from "./jsbi";
 
 declare const BigInt : {
-    (x : number|string|boolean|object) : bigint;
+    (x : number|string|boolean|bigint|object) : bigint;
 };
 
 /**

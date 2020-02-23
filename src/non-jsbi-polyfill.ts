@@ -23,7 +23,7 @@ import {JSBI} from "./jsbi";
  *
  * @param BigInt - The `bigint` polyfill class constructor
  */
-export function getNonJsbiPolyfillBigIntLib (BigInt : { new (x : number|string|boolean|object) : bigint }) : BigIntLib {
+export function getNonJsbiPolyfillBigIntLib (BigInt : { new (x : number|string|boolean|bigint|object) : bigint }) : BigIntLib {
     return {
         isNativelySupported : () => false,
         isBigInt : (x) : x is bigint => x instanceof BigInt,

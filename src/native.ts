@@ -1,7 +1,7 @@
 import {BigIntLib} from "./bigint-lib";
 
 declare const BigInt : {
-    (x : number|string|boolean|object) : bigint;
+    (x : number|string|boolean|bigint|object) : bigint;
     asIntN (bitCount : number, b : bigint) : bigint;
     asUintN (bitCount : number, b : bigint) : bigint;
 };

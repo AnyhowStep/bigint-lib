@@ -186,6 +186,7 @@ The interface is mostly the same as [`jsbi`](https://github.com/GoogleChromeLabs
 |---|---|---|---|
 |Creation from String | `a = BigInt("456")` | `a = biLib.BigInt("456")`
 |Creation from Number | `a = BigInt(789)` | `a = biLib.BigInt(789)`
+|Creation from BigInt | `a = BigInt(a)` | `a = biLib.BigInt(a)`
 |Conversion to String | `a.toString(radix)` | `biLib.toString(a, radix)` | `radix` defaults to `10`; must be in [2, 36]
 |Conversion to Number | `Number(a)` | `biLib.toNumber(a)`
 |Truncation | `BigInt.asIntN(width, a)` | `biLib.asIntN(width, a)` | Throws if `width` is negative
