@@ -134,7 +134,7 @@ However, setting `esModuleInterop:true` may cause other imports to fail.
 
 You may choose to keep `esModuleInterop:false` and change the import to,
 ```ts
-import {JSBI} from "bigint-lib/jsbi";
+import {JSBI} from "bigint-lib/dist/jsbi";
 global.BigInt = JSBI.BigInt;
 ```
 
