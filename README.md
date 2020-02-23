@@ -178,44 +178,44 @@ The following are exported by this library,
 The interface is mostly the same as [`jsbi`](https://github.com/GoogleChromeLabs/jsbi#how)'s
 
 | Operation | native `BigInt` | `bigint-lib` | Note
-|---|---|---|
-Creation from String | `a = BigInt("456")` | `a = bigIntLib.BigInt("456")`
-Creation from Number | `a = BigInt(789)` | `a = bigIntLib.BigInt(789)`
-Conversion to String | `a.toString(radix)` | `bigIntLib.toString(a, radix)`
-Conversion to Number | `Number(a)` | `bigIntLib.toNumber(a)`
-Truncation | `BigInt.asIntN(width, a)` | `bigIntLib.asIntN(width, a)` | Throws if `width` is negative
-           | `BigInt.asUintN(width, a)` | `bigIntLib.asUintN(width, a)` | Throws if `width` is negative
-Type check | `typeof a === "bigint"` | `bigIntLib.isBigInt(a)`
-`BigInt` native support check | `typeof BigInt(0) === "bigint"` | `bigIntLib.isNativelySupported()`
+|---|---|---|---|
+|Creation from String | `a = BigInt("456")` | `a = bigIntLib.BigInt("456")`
+|Creation from Number | `a = BigInt(789)` | `a = bigIntLib.BigInt(789)`
+|Conversion to String | `a.toString(radix)` | `bigIntLib.toString(a, radix)`
+|Conversion to Number | `Number(a)` | `bigIntLib.toNumber(a)`
+|Truncation | `BigInt.asIntN(width, a)` | `bigIntLib.asIntN(width, a)` | Throws if `width` is negative
+|           | `BigInt.asUintN(width, a)` | `bigIntLib.asUintN(width, a)` | Throws if `width` is negative
+|Type check | `typeof a === "bigint"` | `bigIntLib.isBigInt(a)`
+|Native `BigInt` check | `typeof BigInt(0) === "bigint"` | `bigIntLib.isNativelySupported()`
 
 -----
 
 | Operation | native `BigInt` | `bigint-lib` | Note
-|---|---|---|
-Arithmetic | |
-Unary minus | `b = -a` | `b = bigIntLib.unaryMinus(a)`
-Addition | `c = a + b` | `c = bigIntLib.add(a, b)`
-Subtraction | `c = a - b` | `c = bigIntLib.subtract(a, b)`
-Multiplication | `c = a * b` | `c = bigIntLib.multiply(a, b)`
-Division | `c = a / b` | `c = bigIntLib.divide(a, b)` | Throws if `b` is zero
-Remainder | `c = a % b` | `c = bigIntLib.remainder(a, b)` | Throws if `b` is zero
-Exponentiation | `c = a ** b` | `c = bigIntLib.exponentiate(a, b)` | Throws if `b` is negative
-Bitwise | |
-Left-shift | `c = a << b` | `c = bigIntLib.leftShift(a, b)` | Allows negative shift
-Signed right-shift | `c = a >> b` | `c = bigIntLib.signedRightShift(a, b)` | Allows negative shift
-Bitwise NOT | `b = ~a` | `c = bigIntLib.bitwiseNot(a)`
-Bitwise AND | `c = a & b` | `c = bigIntLib.bitwiseAnd(a, b)`
-Bitwise OR | `c = a | b` | `c = bigIntLib.bitwiseOr(a, b)`
-Bitwise XOR | `c = a ^ b` | `c = bigIntLib.bitwiseXor(a, b)`
-Comparison | `a == b` | `bigIntLib.equal(a, b)`
-           | `a != b` | `bigIntLib.notEqual(a, b)`
-           | `a < b` | `bigIntLib.lessThan(a, b)`
-           | `a <= b` | `bigIntLib.lessThanOrEqual(a, b)`
-           | `a > b` | `bigIntLib.greaterThan(a, b)`
-           | `a >= b` | `bigIntLib.greaterThanOrEqual(a, b)`
-Unsupported | |
-literals | `a = 123n` | N/A
-increment | `a++`/`++a` | N/A
-          | `a + 1n`    | `bigIntLib.add(a, bigIntLib.BigInt(1))`
-decrement | `a--`/`--a` | N/A
-          | `a - 1n`    | `bigIntLib.subtract(a, bigIntLib.BigInt(1))`
+|---|---|---|---|
+|Arithmetic | |
+|Unary minus | `b = -a` | `b = bigIntLib.unaryMinus(a)`
+|Addition | `c = a + b` | `c = bigIntLib.add(a, b)`
+|Subtraction | `c = a - b` | `c = bigIntLib.subtract(a, b)`
+|Multiplication | `c = a * b` | `c = bigIntLib.multiply(a, b)`
+|Division | `c = a / b` | `c = bigIntLib.divide(a, b)` | Throws if `b` is zero
+|Remainder | `c = a % b` | `c = bigIntLib.remainder(a, b)` | Throws if `b` is zero
+|Exponentiation | `c = a ** b` | `c = bigIntLib.exponentiate(a, b)` | Throws if `b` is negative
+|Bitwise | |
+|Left-shift | `c = a << b` | `c = bigIntLib.leftShift(a, b)` | Allows negative shift
+|Signed right-shift | `c = a >> b` | `c = bigIntLib.signedRightShift(a, b)` | Allows negative shift
+|Bitwise NOT | `b = ~a` | `c = bigIntLib.bitwiseNot(a)`
+|Bitwise AND | `c = a & b` | `c = bigIntLib.bitwiseAnd(a, b)`
+|Bitwise OR | `c = a \| b` | `c = bigIntLib.bitwiseOr(a, b)`
+|Bitwise XOR | `c = a ^ b` | `c = bigIntLib.bitwiseXor(a, b)`
+|Comparison | `a == b` | `bigIntLib.equal(a, b)`
+|           | `a != b` | `bigIntLib.notEqual(a, b)`
+|           | `a < b` | `bigIntLib.lessThan(a, b)`
+|           | `a <= b` | `bigIntLib.lessThanOrEqual(a, b)`
+|           | `a > b` | `bigIntLib.greaterThan(a, b)`
+|           | `a >= b` | `bigIntLib.greaterThanOrEqual(a, b)`
+|Unsupported | |
+|Literals | `a = 123n` | N/A
+|Increment | `a++`/`++a` | N/A
+|          | `a + 1n`    | `bigIntLib.add(a, bigIntLib.BigInt(1))`
+|Decrement | `a--`/`--a` | N/A
+|          | `a - 1n`    | `bigIntLib.subtract(a, bigIntLib.BigInt(1))`
