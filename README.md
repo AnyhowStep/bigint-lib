@@ -222,3 +222,26 @@ The interface is mostly the same as [`jsbi`](https://github.com/GoogleChromeLabs
 |          | `a + 1n`    | `biLib.add(a, biLib.BigInt(1))`
 |Decrement | `a--`/`--a` | N/A
 |          | `a - 1n`    | `biLib.subtract(a, biLib.BigInt(1))`
+
+-----
+
+### Polyfilling with `node`
+
+1. Have your polyfill code in a `.js` file.
+1. `node -r my-polyfill.js my-entry-point.js`
+
+-----
+
+### Polyfilling with `ts-node`
+
+1. Have your polyfill code in a `.ts` file.
+1. `ts-node -r my-polyfill.ts my-entry-point.ts`
+
+-----
+
+### Development
+
+1. `git clone https://github.com/AnyhowStep/bigint-lib.git`
+1. `npm install`
+1. `npm run sanity-check` to build and run tests.
+1. `npm run` to see a list of commands.
