@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/AnyhowStep/bigint-lib.svg?branch=master)](https://travis-ci.org/AnyhowStep/bigint-lib) [![codecov](https://codecov.io/gh/AnyhowStep/bigint-lib/branch/master/graph/badge.svg)](https://codecov.io/gh/AnyhowStep/bigint-lib) [![HitCount](http://hits.dwyl.io/AnyhowStep/bigint-lib.svg)](http://hits.dwyl.io/AnyhowStep/bigint-lib) ![dependencies](https://david-dm.org/AnyhowStep/bigint-lib.svg)
+[![Build Status](https://travis-ci.com/AnyhowStep/bigint-lib.svg?branch=master)](https://travis-ci.com/AnyhowStep/bigint-lib) [![codecov](https://codecov.io/gh/AnyhowStep/bigint-lib/branch/master/graph/badge.svg)](https://codecov.io/gh/AnyhowStep/bigint-lib) [![HitCount](http://hits.dwyl.io/AnyhowStep/bigint-lib.svg)](http://hits.dwyl.io/AnyhowStep/bigint-lib) ![dependencies](https://david-dm.org/AnyhowStep/bigint-lib.svg)
 
 ### `bigint-lib`
 
