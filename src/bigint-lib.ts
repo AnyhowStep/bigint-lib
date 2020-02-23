@@ -38,6 +38,13 @@ export interface BigIntLib {
     toString (x : bigint, radix? : BigIntToStringRadix) : string;
 
     /**
+     * Converts a `bigint` value to `number`
+     *
+     * @param x - The `bigint` to convert to `number`
+     */
+    toNumber (x : bigint) : number;
+
+    /**
      *
      * @param x - The `bigint` value
      * @returns `-x`
@@ -197,7 +204,7 @@ export interface BigIntLib {
      * The `BigInt.asIntN` static method is used to wrap a BigInt value to a signed integer between
      * `-2^(width-1)` and `2^(width-1)-1`.
      *
-     * @param width - The amount of bits available for the integer size. Must be non-negative
+     * @param width - The amount of bits available for the integer size. Must be non-negative; throws if negative
      * @param bigint - The integer to clamp to fit into the supplied bits.
      * @returns The value of `bigint` modulo `2^width` as a signed integer.
      *
@@ -209,7 +216,7 @@ export interface BigIntLib {
      * The `BigInt.asUintN` static method is used to wrap a BigInt value to an unsigned integer between
      * `0` and `2^(width)-1`.
      *
-     * @param width - The amount of bits available for the integer size. Must be non-negative
+     * @param width - The amount of bits available for the integer size. Must be non-negative; throws if negative
      * @param bigint - The integer to clamp to fit into the supplied bits.
      * @returns The value of `bigint` modulo `2^width` as an unsigned integer.
      *

@@ -18,6 +18,7 @@ export const jsbiPolyfillBigIntLib : BigIntLib = {
 
     BigInt : (x) => BigInt(x),
     toString : (x, radix) => (x as unknown as JSBI).toString(radix),
+    toNumber : (x) => JSBI.toNumber(x as unknown as JSBI),
 
     unaryMinus : (x) => JSBI.unaryMinus(
         x as unknown as JSBI
@@ -100,6 +101,7 @@ export const jsbiPolyfillBigIntLib : BigIntLib = {
 
     asIntN : (n, x) => {
         if (n < 0) {
+            //https://github.com/GoogleChromeLabs/jsbi/issues/39
             throw new RangeError(`Invalid value: not (convertible to) a safe integer`);
         }
         return JSBI.asIntN(
@@ -109,6 +111,7 @@ export const jsbiPolyfillBigIntLib : BigIntLib = {
     },
     asUintN : (n, x) => {
         if (n < 0) {
+            //https://github.com/GoogleChromeLabs/jsbi/issues/39
             throw new RangeError(`Invalid value: not (convertible to) a safe integer`);
         }
         return JSBI.asUintN(

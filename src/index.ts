@@ -1,6 +1,7 @@
-export * from "./bigint-lib";
 import {getBigIntLib} from "./get-bigint-lib";
 import {JSBI} from "./jsbi";
 
-export const bigIntLib = getBigIntLib();
+export * from "./bigint-lib";
+export {getBigIntLib};
 export {JSBI};
+export const bigIntLib = getBigIntLib();

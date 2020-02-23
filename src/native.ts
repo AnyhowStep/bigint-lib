@@ -15,6 +15,7 @@ export const nativeBigIntLib : BigIntLib = {
 
     BigInt : (x) => BigInt(x),
     toString : (x, radix) => (x as any).toString(radix),
+    toNumber : (x) => Number(x),
 
     unaryMinus : (x) => -x,
     bitwiseNot : (x) => ~x,
