@@ -38,6 +38,8 @@ bigIntLib.BigInt(0);
 
 See [API](#api) for more details
 
+Since this library is meant for library authors, reading the [source code](src) to understand how it works internally is recommended.
+
 -----
 
 ### Motivation
@@ -182,7 +184,7 @@ The interface is mostly the same as [`jsbi`](https://github.com/GoogleChromeLabs
 |---|---|---|---|
 |Creation from String | `a = BigInt("456")` | `a = biLib.BigInt("456")`
 |Creation from Number | `a = BigInt(789)` | `a = biLib.BigInt(789)`
-|Conversion to String | `a.toString(radix)` | `biLib.toString(a, radix)`
+|Conversion to String | `a.toString(radix)` | `biLib.toString(a, radix)` | `radix` defaults to `10`; must be in [2, 36]
 |Conversion to Number | `Number(a)` | `biLib.toNumber(a)`
 |Truncation | `BigInt.asIntN(width, a)` | `biLib.asIntN(width, a)` | Throws if `width` is negative
 |           | `BigInt.asUintN(width, a)` | `biLib.asUintN(width, a)` | Throws if `width` is negative
