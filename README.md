@@ -58,9 +58,9 @@ However, **libraries** cannot assume that `BigInt` is natively supported, or pol
 
 A library has to check.
 
-If it is natively supported, it can use `BigInt` and all built-in operations.
+If it is natively supported, we can use `BigInt` and all built-in operations directly.
 
-If it is **polyfilled**, it cannot assume the API exposed by the polyfill for built-in operations.
+If it is **polyfilled**, we cannot assume the shape of the exposed API for built-in operations.
 
 Is addition done with `x.add(y)`? Or `Polyfill.add(x, y)`? Or `x.plus(y)`? Is it even implemented at all?
 
@@ -170,6 +170,7 @@ The following are exported by this library,
 + [`getBigIntLib()`](src/get-bigint-lib.ts) returns an instanceof `BigIntLib`, depending on whether `BigInt` is native or polyfilled. See [How it works](#how-it-works) for more details.
 + `JSBI` is a re-export of [`jsbi`](https://github.com/GoogleChromeLabs/jsbi)
 + `bigIntLib` is of type [`BigIntLib`](src/bigint-lib.ts) and is initialized with [`getBigIntLib()`](src/get-bigint-lib.ts) when `bigint-lib` is first imported.
++ `biLib` is a synonym for `bigIntLib`; in case `bigIntLib` is too verbose
 
 -----
 
@@ -179,43 +180,43 @@ The interface is mostly the same as [`jsbi`](https://github.com/GoogleChromeLabs
 
 | Operation | native `BigInt` | `bigint-lib` | Note
 |---|---|---|---|
-|Creation from String | `a = BigInt("456")` | `a = bigIntLib.BigInt("456")`
-|Creation from Number | `a = BigInt(789)` | `a = bigIntLib.BigInt(789)`
-|Conversion to String | `a.toString(radix)` | `bigIntLib.toString(a, radix)`
-|Conversion to Number | `Number(a)` | `bigIntLib.toNumber(a)`
-|Truncation | `BigInt.asIntN(width, a)` | `bigIntLib.asIntN(width, a)` | Throws if `width` is negative
-|           | `BigInt.asUintN(width, a)` | `bigIntLib.asUintN(width, a)` | Throws if `width` is negative
-|Type check | `typeof a === "bigint"` | `bigIntLib.isBigInt(a)`
-|Native `BigInt` check | `typeof BigInt(0) === "bigint"` | `bigIntLib.isNativelySupported()`
+|Creation from String | `a = BigInt("456")` | `a = biLib.BigInt("456")`
+|Creation from Number | `a = BigInt(789)` | `a = biLib.BigInt(789)`
+|Conversion to String | `a.toString(radix)` | `biLib.toString(a, radix)`
+|Conversion to Number | `Number(a)` | `biLib.toNumber(a)`
+|Truncation | `BigInt.asIntN(width, a)` | `biLib.asIntN(width, a)` | Throws if `width` is negative
+|           | `BigInt.asUintN(width, a)` | `biLib.asUintN(width, a)` | Throws if `width` is negative
+|Type check | `typeof a === "bigint"` | `biLib.isBigInt(a)`
+|Native `BigInt` check | `typeof BigInt(0) === "bigint"` | `biLib.isNativelySupported()`
 
 -----
 
 | Operation | native `BigInt` | `bigint-lib` | Note
 |---|---|---|---|
 |Arithmetic | |
-|Unary minus | `b = -a` | `b = bigIntLib.unaryMinus(a)`
-|Addition | `c = a + b` | `c = bigIntLib.add(a, b)`
-|Subtraction | `c = a - b` | `c = bigIntLib.subtract(a, b)`
-|Multiplication | `c = a * b` | `c = bigIntLib.multiply(a, b)`
-|Division | `c = a / b` | `c = bigIntLib.divide(a, b)` | Throws if `b` is zero
-|Remainder | `c = a % b` | `c = bigIntLib.remainder(a, b)` | Throws if `b` is zero
-|Exponentiation | `c = a ** b` | `c = bigIntLib.exponentiate(a, b)` | Throws if `b` is negative
+|Unary minus | `b = -a` | `b = biLib.unaryMinus(a)`
+|Addition | `c = a + b` | `c = biLib.add(a, b)`
+|Subtraction | `c = a - b` | `c = biLib.subtract(a, b)`
+|Multiplication | `c = a * b` | `c = biLib.multiply(a, b)`
+|Division | `c = a / b` | `c = biLib.divide(a, b)` | Throws if `b` is zero
+|Remainder | `c = a % b` | `c = biLib.remainder(a, b)` | Throws if `b` is zero
+|Exponentiation | `c = a ** b` | `c = biLib.exponentiate(a, b)` | Throws if `b` is negative
 |Bitwise | |
-|Left-shift | `c = a << b` | `c = bigIntLib.leftShift(a, b)` | Allows negative shift
-|Signed right-shift | `c = a >> b` | `c = bigIntLib.signedRightShift(a, b)` | Allows negative shift
-|Bitwise NOT | `b = ~a` | `c = bigIntLib.bitwiseNot(a)`
-|Bitwise AND | `c = a & b` | `c = bigIntLib.bitwiseAnd(a, b)`
-|Bitwise OR | `c = a \| b` | `c = bigIntLib.bitwiseOr(a, b)`
-|Bitwise XOR | `c = a ^ b` | `c = bigIntLib.bitwiseXor(a, b)`
-|Comparison | `a == b` | `bigIntLib.equal(a, b)`
-|           | `a != b` | `bigIntLib.notEqual(a, b)`
-|           | `a < b` | `bigIntLib.lessThan(a, b)`
-|           | `a <= b` | `bigIntLib.lessThanOrEqual(a, b)`
-|           | `a > b` | `bigIntLib.greaterThan(a, b)`
-|           | `a >= b` | `bigIntLib.greaterThanOrEqual(a, b)`
+|Left-shift | `c = a << b` | `c = biLib.leftShift(a, b)` | Allows negative shift
+|Signed right-shift | `c = a >> b` | `c = biLib.signedRightShift(a, b)` | Allows negative shift
+|Bitwise NOT | `b = ~a` | `c = biLib.bitwiseNot(a)`
+|Bitwise AND | `c = a & b` | `c = biLib.bitwiseAnd(a, b)`
+|Bitwise OR | `c = a \| b` | `c = biLib.bitwiseOr(a, b)`
+|Bitwise XOR | `c = a ^ b` | `c = biLib.bitwiseXor(a, b)`
+|Comparison | `a == b` | `biLib.equal(a, b)`
+|           | `a != b` | `biLib.notEqual(a, b)`
+|           | `a < b` | `biLib.lessThan(a, b)`
+|           | `a <= b` | `biLib.lessThanOrEqual(a, b)`
+|           | `a > b` | `biLib.greaterThan(a, b)`
+|           | `a >= b` | `biLib.greaterThanOrEqual(a, b)`
 |Unsupported | |
 |Literals | `a = 123n` | N/A
 |Increment | `a++`/`++a` | N/A
-|          | `a + 1n`    | `bigIntLib.add(a, bigIntLib.BigInt(1))`
+|          | `a + 1n`    | `biLib.add(a, biLib.BigInt(1))`
 |Decrement | `a--`/`--a` | N/A
-|          | `a - 1n`    | `bigIntLib.subtract(a, bigIntLib.BigInt(1))`
+|          | `a - 1n`    | `biLib.subtract(a, biLib.BigInt(1))`

@@ -5,3 +5,4 @@ export * from "./bigint-lib";
 export {getBigIntLib};
 export {JSBI};
 export const bigIntLib = getBigIntLib();
+export const biLib = bigIntLib;
