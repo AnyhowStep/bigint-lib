@@ -1,0 +1,40 @@
+{
+  "name": "bigint-lib",
+  "version": "0.0.0",
+  "description": "Use BigInt in library code, whether native or polyfilled",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "(tsc) && (cp ./src/jsbi.d.ts ./dist/jsbi.d.ts)",
+    "clean": "(rm -r ./dist || true)",
+    "rebuild": "(npm run clean) && (npm run build)",
+    "ts-node-test": "ts-node -P ./test/run-time/tsconfig.json -r ./test/run-time/original-bigint.ts -r ./test/run-time/tape-stream.ts",
+    "test-jsbi-polyfill": "npm run ts-node-test -- -r ./test/run-time/jsbi-polyfill.ts ./test/run-time/runner.ts",
+    "test-non-jsbi-polyfill": "npm run ts-node-test -- -r ./test/run-time/non-jsbi-polyfill.ts ./test/run-time/runner.ts",
+    "test-native": "npm run ts-node-test -- -r ./test/run-time/native.ts ./test/run-time/runner.ts",
+    "test-all": "(npm run test-jsbi-polyfill) && (npm run test-non-jsbi-polyfill) && (npm run test-native)",
+    "c8-report": "c8 --reporter=html npm run test-all",
+    "sanity-check": "(npm run rebuild) && (c8 npm run test-all)",
+    "sanity-check-travis": "npm run sanity-check"
+  },
+  "author": "anyhowstep",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AnyhowStep/bigint-lib"
+  },
+  "bugs": {
+    "url": "https://github.com/AnyhowStep/bigint-lib/issues"
+  },
+  "homepage": "https://github.com/AnyhowStep/bigint-lib#readme",
+  "devDependencies": {
+    "@types/tape": "^4.2.34",
+    "c8": "^7.1.0",
+    "tape": "^4.13.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "jsbi": "^3.1.1"
+  }
+}

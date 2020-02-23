@@ -1,0 +1,15 @@
+{
+    "extends" : "../../tsconfig-base.json",
+    "compilerOptions": {
+        "target": "esnext"
+    },
+    "compileOnSave": false,
+
+    "include": [
+        "./jsbi-polyfill.ts",
+        "./non-jsbi-polyfill.ts",
+        "./original-bigint.ts",
+        "./runner.ts",
+        "./input/**/*.ts"
+    ]
+}
