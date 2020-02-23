@@ -7,6 +7,9 @@
   "files": [
     "dist"
   ],
+  "keywords": [
+    "bigint"
+  ],
   "scripts": {
     "build": "(tsc) && (cp ./src/jsbi.d.ts ./dist/jsbi.d.ts)",
     "clean": "(rm -r ./dist || true)",
