@@ -40,6 +40,12 @@ export interface BigIntLib {
     /**
      * Converts a `bigint` value to `number`
      *
+     * May result in precision loss,
+     * ```ts
+     *  bigIntLib.toNumber(bigIntLib.BigInt("9999999999999999"))
+     *  > 10000000000000000
+     * ```
+     *
      * @param x - The `bigint` to convert to `number`
      */
     toNumber (x : bigint) : number;
