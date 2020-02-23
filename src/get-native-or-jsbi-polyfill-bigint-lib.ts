@@ -1,61 +1,10 @@
-import {getBigIntLib} from "./get-bigint-lib";
-import {getNativeOrJsbiPolyfillBigIntLib} from "./get-native-or-jsbi-polyfill-bigint-lib";
-import {JSBI} from "./jsbi";
+import {BigIntLib} from "./bigint-lib";
+import {nativeBigIntLib} from "./native";
+import {jsbiPolyfillBigIntLib} from "./jsbi-polyfill";
 
-export * from "./bigint-lib";
-export {getBigIntLib};
-export {getNativeOrJsbiPolyfillBigIntLib};
-export {JSBI};
-
-/**
- * Assumes `global.BigInt` is natively supported,
- * or polyfilled.
- *
- * -----
- *
- * If `BigInt` is natively supported,
- * the most efficient `BigIntLib` instance is returned.
- *
- * Each method will just be an alias for the native operators and functions.
- *
- * -----
- *
- * If `BigInt` is polyfilled to be,
- * ```ts
- *  import JSBI from "jsbi";
- *  global.BigInt = JSBI.BigInt;
- * ```
- *
- * An efficient `BigIntLib` instance is returned.
- * It will take JSBI instances as arguments,
- * and return JSBI instances.
- *
- * -----
- *
- * If `BigInt` is, minimally, polyfilled to be,
- * ```ts
- *  class MyPolyfill {
- *      constructor (mixed) {
- *          //snip https://tc39.es/ecma262/#sec-bigint-constructor
- *      }
- *
- *      toString () {
- *          return //snip base-10 string
- *      }
- *  }
- *  global.BigInt = (mixed) => new MyPolyfill(mixed);
- * ```
- *
- * A less efficient `BigIntLib` instance is returned.
- * It will internally use [`jsbi`](https://github.com/GoogleChromeLabs/jsbi) to
- * implement all the necessary `bigint` operations.
- *
- */
-export const bigIntLib = getBigIntLib();
-/**
- * Synonym for `bigIntLib`.
- */
-export const biLib = bigIntLib;
+declare const BigInt : {
+    (x : number|string|object) : bigint;
+};
 
 /**
  * If `global.BigInt` is natively supported, returns `nativeBigIntLib`.
@@ -104,8 +53,10 @@ export const biLib = bigIntLib;
  *  }
  * ```
  */
-export const nativeOrJsbiLib = getNativeOrJsbiPolyfillBigIntLib();
-
-export * from "./jsbi-polyfill";
-export * from "./native";
-export * from "./non-jsbi-polyfill";
+export function getNativeOrJsbiPolyfillBigIntLib () : BigIntLib {
+    const bigint = BigInt(0);
+    if (typeof bigint === "bigint") {
+        return nativeBigIntLib;
+    }
+    return jsbiPolyfillBigIntLib;
+}

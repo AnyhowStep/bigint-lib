@@ -1,10 +1,6 @@
 import {BigIntLib} from "./bigint-lib";
 import {JSBI} from "./jsbi";
 
-declare const BigInt : {
-    (x : number|string|boolean|bigint|object) : bigint;
-};
-
 /**
  * Assumes `BigInt` is polyfilled to be,
  * ```ts
@@ -16,7 +12,7 @@ export const jsbiPolyfillBigIntLib : BigIntLib = {
     isNativelySupported : () => false,
     isBigInt : (x) : x is bigint => x instanceof JSBI,
 
-    BigInt : (x) => BigInt(x),
+    BigInt : (x) => JSBI.BigInt(x as any) as unknown as bigint,
     toString : (x, radix) => (x as unknown as JSBI).toString(radix),
     toNumber : (x) => JSBI.toNumber(x as unknown as JSBI),
 

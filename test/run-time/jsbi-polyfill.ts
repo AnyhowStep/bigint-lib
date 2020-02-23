@@ -9,7 +9,7 @@ import {OriginalBigInt} from "./original-bigint";
 };
 
 import * as tape from "tape";
-import {bigIntLib} from "../../dist";
+import {bigIntLib, nativeOrJsbiLib, jsbiPolyfillBigIntLib} from "../../dist";
 
 tape(__filename, t => {
     t.deepEqual(bigIntLib.isNativelySupported(), false);
@@ -20,6 +20,10 @@ tape(__filename, t => {
     t.deepEqual(
         (bigIntLib.BigInt(1) as any) instanceof JSBI,
         true
+    );
+    t.deepEqual(
+        nativeOrJsbiLib,
+        jsbiPolyfillBigIntLib
     );
     t.end();
 });

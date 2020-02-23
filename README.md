@@ -175,6 +175,11 @@ The following are exported by this library,
 + `JSBI` is a re-export of [`jsbi`](https://github.com/GoogleChromeLabs/jsbi)
 + `bigIntLib` is of type [`BigIntLib`](src/bigint-lib.ts) and is initialized with [`getBigIntLib()`](src/get-bigint-lib.ts) when `bigint-lib` is first imported.
 + `biLib` is a synonym for `bigIntLib`; in case `bigIntLib` is too verbose
++ [`nativeBigIntLib`](src/native.ts) is a [`BigIntLib`](src/bigint-lib.ts) instance that assumes `BigInt` is natively supported.
++ [`jsbiPolyfillBigIntLib`](src/jsbi-polyfill.ts) is a [`BigIntLib`](src/bigint-lib.ts) instance that assumes `BigInt` is polyfilled with [`jsbi`](https://github.com/GoogleChromeLabs/jsbi).
++ [`getNonJsbiPolyfillBigIntLib()`](src/non-jsbi-polyfill.ts) returns a [`BigIntLib`](src/bigint-lib.ts) instance that assumes `BigInt` is polyfilled with some other library.
++ [`getNativeOrJsbiPolyfillBigIntLib()`](src/get-native-or-jsbi-polyfill-bigint-lib.ts) returns a [`nativeBigIntLib`](src/native.ts) or [`jsbiPolyfillBigIntLib`](src/jsbi-polyfill.ts), depending on whether `BigInt` is natively supported or polyfilled.
++ `nativeOrJsbiLib` is a [`BigIntLib`](src/bigint-lib.ts) instance and is initialized with [`getNativeOrJsbiPolyfillBigIntLib()`](src/get-native-or-jsbi-polyfill-bigint-lib.ts) when `bigint-lib` is first imported.
 
 -----
 
@@ -225,6 +230,58 @@ The interface is mostly the same as [`jsbi`](https://github.com/GoogleChromeLabs
 |          | `a + 1n`    | `biLib.add(a, biLib.BigInt(1))`
 |Decrement | `a--`/`--a` | N/A
 |          | `a - 1n`    | `biLib.subtract(a, biLib.BigInt(1))`
+
+-----
+
+### `nativeOrJsbiLib`
+
+
+If `global.BigInt` is natively supported, returns `nativeBigIntLib`.
+Otherwise, returns `jsbiPolyfillBigIntLib`.
+
+This is useful for libraries that need to perform many complex
+`BigInt` operations before returning a result.
+
+-----
+
+```ts
+import {bigIntLib, nativeOrJsbiLib} from "bigint-lib";
+
+const my1 = nativeOrJsbiLib.BigInt(1);
+
+//Takes native or JSBI polyfilled bigints
+//Will return a native or JSBI polyfilled bigint
+function myComplexFunctionImpl (m : bigint, n : bigint) : bigint {
+    if (nativeOrJsbiLib.equal(m, 0)) {
+        return nativeOrJsbiLib.add(n, my1);
+    }
+    if (nativeOrJsbiLib.equal(n, 0)) {
+        return myComplexFunctionImpl(
+            nativeOrJsbiLib.subtract(m, my1),
+            my1
+        );
+    }
+    return myComplexFunctionImpl(
+        nativeOrJsbiLib.subtract(m, my1),
+        myComplexFunctionImpl(m, nativeOrJsbiLib.subtract(n, 1))
+    );
+}
+
+//Takes native, JSBI polyfilled, or other polyfilled bigints
+//Must return a `bigint` that may be native, polyfilled with JSBI, or polyfilled with other libraries
+function myComplexFunction (m : bigint, n : bigint) : bigint {
+    //Will be a native or JSBI polyfilled `bigint`
+    const myM = nativeOrJsbiLib.BigInt(m.toString());
+    const myN = nativeOrJsbiLib.BigInt(n.toString());
+    const myResult = myComplexFunctionImpl(myM, myN);
+
+    //Convert the result to a `bigint` type the same as its input
+    return bigIntLib.BigInt(myResult.toString());
+}
+```
+
+Using `nativeOrJsbiLib` saves the time needed to convert between JSBI and other polyfill libraries,
+if other polyfill libraries are used.
 
 -----
 
